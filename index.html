@@ -83,8 +83,11 @@
       });
       /*When the "+", "x" or "/" operator is clicked, it checks if the last element is an operator exluding "-".
       If the last element is indeed "+", "x" or "/", it'll switch that operator to the new one clicked.
-      If you clicked "-" and the first number is "0", "0" will change to "-".
-      */
+      If there's two operators in a row (Ex. "+-", "--", "x-", "/-") and you click on an operator again,
+      those two operators will be deleted and replaced with the new one.
+      If you clicked "-" and the first and only number is "0", "0" will change to "-".
+      If you clicked on an operator and the last element of the formula is ".",
+      it'll push "0" before adding the operator.*/
       $('.operator').click(function() {
         let oppRegex = /\+|x|\//gm;
 
@@ -94,25 +97,21 @@
           formulaArr[formulaArr.length - 1] = $(event.target).text();
         } else if (formulaArr[formulaArr.length - 1] === '-' && opp1Regex.test(formulaArr[formulaArr.length - 2])) {
           formulaArr.splice(formulaArr.length - 2, 2, $(event.target).text());
-        } else if ($(event.target).text() === '-' && formulaArr[formulaArr.length - 1] === '-') {
-          formulaArr.push($(event.target).text());
         } else if (formulaArr.length === 1 && formulaArr[0] === '0' && $(event.target).text() === '-') {
           formulaArr[0] = $(event.target).text();
         } else if (formulaArr[formulaArr.length - 1] === '.') {
           formulaArr.push('0', $(event.target).text());
-        } else if (formulaArr[formulaArr.length - 1] !== '-') {
+        } else {
           formulaArr.push($(event.target).text());
         }
 
         $('#display').text(formulaArr.join(''));
       });
-
+      /*When you click on equal, all positive and negative floats in string form are separated from operators.
+      While formulaArr has more than one float in it, we run a for loop executing multiplications and divisions.
+      Finally we sum up all floats in the array and display the result.*/
       $('#equals').click(function() {
         formulaArr = formulaArr.join('').split(/(\+|--|x|\/)|(?=-)/gm).filter(x => x != undefined);
-
-        if (formulaArr[formulaArr.length - 1] === 'x' || formulaArr[formulaArr.length - 1] === '/') {
-          formulaArr = formulaArr.pop();
-        }
 
         let i;
 
@@ -124,9 +123,7 @@
           for (i = 0; i < formulaArr.length; i++) {
             if (formulaArr[i] === 'x' || formulaArr[i] === '/') {
               if (formulaArr[i] === '/' && parseFloat(formulaArr[i + 1]) === 0) {
-                formulaArr = ['0'];
-
-                $('#display').text('Error 2');
+                formulaArr = ['Error 2'];
               } else if (formulaArr[i] === '/') {
                 let quotient = parseFloat(formulaArr[i - 1]) / parseFloat(formulaArr[i + 1]);
 
@@ -149,8 +146,7 @@
 
         $('#display').text(formulaArr[0]);
       });
-
-
+      /*Clicking clear reset the array to it's default state.*/
       $('#clear').click(function() {
         formulaArr = ['0'];
 
