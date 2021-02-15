@@ -4,48 +4,49 @@
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Calculator-style.css">
-    <title></title>
+    <title>JavaScript Calculator</title>
   </head>
 
   <body>
+    <h1 id="app-title">JavaScript Calculator</h1>
+
     <p id="display">0</p>
 
-    <p id="formula"></p>
+    <div id="container">
+      <button type="button" class="digit" id="zero">0</button>
 
-    <button type="button" class="digit" id="zero">0</button>
+      <button type="button" class="digit" id="one">1</button>
 
-    <button type="button" class="digit" id="one">1</button>
+      <button type="button" class="digit" id="two">2</button>
 
-    <button type="button" class="digit" id="two">2</button>
+      <button type="button" class="digit" id="three">3</button>
 
-    <button type="button" class="digit" id="three">3</button>
+      <button type="button" class="digit" id="four">4</button>
 
-    <button type="button" class="digit" id="four">4</button>
+      <button type="button" class="digit" id="five">5</button>
 
-    <button type="button" class="digit" id="five">5</button>
+      <button type="button" class="digit" id="six">6</button>
 
-    <button type="button" class="digit" id="six">6</button>
+      <button type="button" class="digit" id="seven">7</button>
 
-    <button type="button" class="digit" id="seven">7</button>
+      <button type="button" class="digit" id="eight">8</button>
 
-    <button type="button" class="digit" id="eight">8</button>
+      <button type="button" class="digit" id="nine">9</button>
 
-    <button type="button" class="digit" id="nine">9</button>
+      <button type="button" id="decimal">.</button>
 
-    <button type="button" id="decimal">.</button>
+      <button type="button" class="operator" id="add">+</button>
 
-    <button type="button" class="operator" id="add">+</button>
+      <button type="button" class="operator" id="subtract">-</button>
 
-    <button type="button" class="operator" id="subtract">-</button>
+      <button type="button" class="operator" id="multiply">x</button>
 
-    <button type="button" class="operator" id="multiply">x</button>
+      <button type="button" class="operator" id="divide">/</button>
 
-    <button type="button" class="operator" id="divide">/</button>
+      <button type="button" id="equals">=</button>
 
-    <button type="button" id="equals">=</button>
-
-    <button type="button" id="clear">AC</button>
-
+      <button type="button" id="clear">AC</button>
+    </div>
     <script>
     $(document).ready(function() {
       let formulaArr = ['0'];
